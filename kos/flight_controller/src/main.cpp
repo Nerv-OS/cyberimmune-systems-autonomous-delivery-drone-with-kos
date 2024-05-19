@@ -126,8 +126,19 @@ int main(void) {
     //The flight is need to be controlled from now on
     //Also we need to check on ORVD, whether the flight is still allowed or it is need to be paused
 
-    while (true)
-        sleep(1000);
+		while (true)
+    {
+        sleep(1);
+
+        int32_t lat;
+        int32_t lon;
+        int32_t alt;
+
+        getCoords(lat, lon, alt);
+
+        fprintf(stderr, "-------------------------------\n");
+        fprintf(stderr, "lat = %d, long = %d, alt = %d\n", lat, lon, alt);
+    }
 
     return EXIT_SUCCESS;
 }
