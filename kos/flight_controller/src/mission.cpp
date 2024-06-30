@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <vector>
 
 #define COMMAND_MAX_STRING_LEN 32
 
@@ -198,4 +199,19 @@ void printMission() {
             break;
         }
     }
+}
+
+
+std::vector<CommandWaypoint> get_command_waypoints()
+{
+    std::vector<CommandWaypoint> command_waypoints;
+
+    for (int i = 0; i < commandNum; i++)
+    {
+        if(commands[i].type == CommandType::WAYPOINT)
+        {
+            command_waypoints.push_back(commands[i].content.waypoint);
+        }
+    }
+    return command_waypoints;
 }
