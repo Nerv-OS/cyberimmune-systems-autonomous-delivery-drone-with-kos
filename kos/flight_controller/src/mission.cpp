@@ -1,9 +1,5 @@
 #include "../include/mission.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <vector>
 
 #define COMMAND_MAX_STRING_LEN 32
 
@@ -214,4 +210,23 @@ std::vector<CommandWaypoint> get_command_waypoints()
         }
     }
     return command_waypoints;
+}
+
+std::vector<MissionCommand> get_commands()
+{
+    std::vector<MissionCommand> ret_commands;
+
+    for (int i = 0; i < commandNum; i++)
+    {
+        ret_commands.push_back(commands[i]);
+    }
+    return ret_commands;
+}
+
+
+
+
+int32_t get_home_altitude()
+{
+    return commands[0].content.waypoint.altitude;
 }

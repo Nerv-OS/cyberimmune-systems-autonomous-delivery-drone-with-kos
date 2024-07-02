@@ -66,7 +66,7 @@ double distance (const CommandWaypoint& a, const CommandWaypoint& b)
 }
 
 
-bool operator== (const Line& l1, const Line& l2)
+bool operator == (const Line& l1, const Line& l2)
 {
     return (l1.a * l2.a == Vector3D(0, 0, 0)) && ((l1.r0 - l2.r0) * l1.a == Vector3D(0, 0, 0));
 }

@@ -14,6 +14,10 @@
 #include <unistd.h>
 
 #include "../include/coords.h"
+#include "../include/security.h"
+#include <chrono>
+#include <thread>
+
 
 #define RETRY_DELAY_SEC 1
 #define RETRY_REQUEST_DELAY_SEC 5
@@ -128,18 +132,19 @@ int main(void) {
     //The flight is need to be controlled from now on
     //Also we need to check on ORVD, whether the flight is still allowed or it is need to be paused
 
-		while (true)
+
+    double t = 0.1;
+    Security sec = Security{get_commands(),t};
+    while(!sec.check_is_flying())
     {
-        sleep(1);
+        sleep(4);
+    }
+    setCargoLock(0);
+	while (true)
+    {
+        std::this_thread::sleep_for(std::chrono::milliseconds(int(t*1000)));
 
-        int32_t lat;
-        int32_t lon;
-        int32_t alt;
-
-        getCoords(lat, lon, alt);
-
-        fprintf(stderr, "-------------------------------\n");
-        fprintf(stderr, "lat = %d, long = %d, alt = %d\n", lat, lon, alt);
+        sec.tick();
     }
 
     return EXIT_SUCCESS;

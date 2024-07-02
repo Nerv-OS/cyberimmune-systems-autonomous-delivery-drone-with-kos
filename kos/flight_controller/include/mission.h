@@ -1,5 +1,9 @@
 #pragma once
 #include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <vector>
 
 enum CommandType {
     HOME,
@@ -29,6 +33,8 @@ struct CommandWaypoint {
     }
 };
 
+
+
 struct CommandServo {
     int32_t number;
     int32_t pwm;
@@ -52,3 +58,10 @@ struct MissionCommand {
 
 int parseMission(char* response);
 void printMission();
+
+std::vector<CommandWaypoint> get_command_waypoints();
+
+std::vector<MissionCommand> get_commands();
+
+
+int32_t get_home_altitude();
